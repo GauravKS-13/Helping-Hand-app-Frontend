@@ -59,7 +59,7 @@
             </div>
     </div>
 
-    <div class="loading" v-if="status === 'notFound'">
+    <div class="loading" v-if="resultStatus">
         <h5>No Donor is present in this City...try to find in another city</h5>
     </div>
     
@@ -233,6 +233,7 @@ export default {
             cities: [ 'ajmer','alwar','banswara','baran','barmer','bharatpur','bhilwara','bikaner','bundi','chittorgarh','churu', 'dausa','dholpur','dungarpur','janumangarh','jaipur','jaisalmer','jalore','jhalawar','jhunjhunu','jodhpur','karauli','kota','nagaur','pali','pratapgarh','rajsamand','sawai madhopur','sikar','sirohi','sri ganganagar','tonk','udaipur' ],
             allDonors: [],
             status: 'Loading',
+            resultStatus: false,
             showForm: false,
 
             donorForm: {
@@ -303,10 +304,10 @@ export default {
             this.status = 'Loading';
             searchDonors( this.parameters )
                 .then( searchedDonors => {
-                this.allDonors = searchedDonors
-                this.status = 'Loaded'
-                if( searchDonors.length === 0 ) {
-                    this.status = 'notFound'
+                    this.allDonors = searchedDonors
+                    this.status = 'Loaded'
+                if( searchedDonors.length === 0 ) {
+                    this.resultStatus = true;
                 }
                 })
                 .catch( error => {
@@ -332,14 +333,14 @@ export default {
             addDonor( donorDetails )
                 .then(() => {
                     Vue.$toast.open( {
-                        message: "Donor Registration Done ",
+                        message: "Donor Registration Done",
                         duration: 3000,
                         type: 'success'
                     })
                 })
-                .catch( error => {
+                .catch( () => {
                     Vue.$toast.open( {
-                        message: error.message,
+                        message: "Email id is not register OR Already Donor",
                         duration: 3000,
                         type: 'error'
                     })
@@ -373,14 +374,15 @@ body{
   font-family: 'Baloo Bhai 2', cursive;
 }
 
-.loading {
-    background-color: rgb(180, 175, 175);
-    border-radius: 1em;
-    padding: 0.5em;
-    width : 60%;
-    margin: 0 auto;
+.loading{
+    background-color: rgba(247, 116, 116, 0.6);
+    border-radius: 0.5em;
+    padding: 2em;
     text-align: center;
-  }
+    width: 75%;
+    margin:auto;
+    margin-top: 2em;  
+}
 
 .donor-container{
     width: 75%;

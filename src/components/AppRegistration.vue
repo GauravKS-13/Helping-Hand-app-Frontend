@@ -160,9 +160,9 @@ export default {
                         });
                         this.$router.push({ name: 'login-page' });
                     })
-                     .catch( error => { 
+                     .catch( () => { 
                         Vue.$toast.open({
-                        message :error.response.data.message,
+                        message :'Already Registered User',
                         duration: 5000,
                         type :'error'
                         });
@@ -203,7 +203,8 @@ body {
 .registration-container {
     font-family: ui-monospace;
     width:25%;
-    margin:auto;
+    margin: auto 60%;
+    padding: 10% 0;
 }
 /* 
 .registration-form{

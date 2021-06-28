@@ -336,17 +336,21 @@ export default {
         addThisRequest() {
             // @Api Call
             // Argument pass - form data
+            this.$v.requestForm.$touch();
+            
+            if( !this.$v.requestForm.$invalid ) {
             addRequest( this.requestForm )
             .then( () => {
+                
                 Vue.$toast.open( {
                     message: "Request added successfully",
                     duration: 3000,
                     type: 'success'
                 })
             })
-            .catch( error => {
+            .catch( () => {
                 Vue.$toast.open( {
-                    message: error.message,
+                    message: 'Email is not register',
                     duration: 3000,
                     type: 'error'
                 })
@@ -364,6 +368,7 @@ export default {
             this.requestForm.email = '';
             this.requestForm.contact = '';
             this.requestForm.urgerntRequirment = '';
+        }    
         },
 
         shouldAppendErrorClass( field ) {
@@ -398,6 +403,7 @@ a:hover{
     width: 74vw;
     margin: auto;
     background:rgba(255, 211, 217, 0.3);  
+    padding: 0.5em 1.5em;
 }
 
 .page-heading{

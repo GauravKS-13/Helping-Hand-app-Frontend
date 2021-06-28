@@ -140,6 +140,8 @@ export default {
         removeRequest( request ) {
             deleteRequest( request._id )
                 .then( () => {
+                    let allRequests = this.foundRequests;
+                    this.foundRequests = allRequests.filter( onereq => onereq._id !== request._id ) 
                     Vue.$toast.open( {
                     message : 'Request Deleted Successfully',
                     duration : 3000,
