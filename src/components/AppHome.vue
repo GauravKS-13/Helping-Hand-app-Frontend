@@ -14,7 +14,7 @@
             <form class="search-donor-details" >
                 <div class="select-group">
                     <label for="search-blood-group" class="label-class"> Blood Group</label>
-                    <select id="search-blood-group" class="select-blood-group" v-model="parameters.bloodGroup">
+                    <select id="search-blood-group" class="select-blood-group" v-model="group">
                         <option value=""></option>
                         <option v-for="bloodGroup in allBloodGroups" :value="bloodGroup" :key="bloodGroup">{{bloodGroup}}</option>
                     </select>
@@ -231,11 +231,11 @@ export default {
             allBloodGroups: [ "A+", "B+", "AB+", "O+", "O-", "A-", "B-", "AB-"],
 
             cities: [ 'ajmer','alwar','banswara','baran','barmer','bharatpur','bhilwara','bikaner','bundi','chittorgarh','churu', 'dausa','dholpur','dungarpur','janumangarh','jaipur','jaisalmer','jalore','jhalawar','jhunjhunu','jodhpur','karauli','kota','nagaur','pali','pratapgarh','rajsamand','sawai madhopur','sikar','sirohi','sri ganganagar','tonk','udaipur' ],
+
             allDonors: [],
             status: 'Loading',
             resultStatus: false,
             showForm: false,
-
             donorForm: {
                 name: '',
                 age: null,
@@ -245,7 +245,7 @@ export default {
                 city: '',
                 state: ''
             },
-
+            group: '',
             parameters: {
                 bloodGroup:'',
                 city:''
@@ -301,18 +301,25 @@ export default {
         },
 
         findDonors() {
+
+            // giving search form value to the parameter ( bloodGroup )   
+            this.parameters.bloodGroup = this.group;
             this.status = 'Loading';
+            // getting encoded blood group  
+            this.parameters.bloodGroup = this.encodeBloodGrouop( this.parameters.bloodGroup )
+            // console.log( this.parameters )
             searchDonors( this.parameters )
                 .then( searchedDonors => {
                     this.allDonors = searchedDonors
                     this.status = 'Loaded'
+                    this.resultStatus = false;
                 if( searchedDonors.length === 0 ) {
                     this.resultStatus = true;
                 }
                 })
                 .catch( error => {
                     this.status = 'Error'
-                    console.log( error)
+                    console.log( error )
                 })
         },
 
@@ -328,8 +335,10 @@ export default {
                     state: this.donorForm.state
                 }
             }
-            console.log( "donor-details =",donorDetails )
 
+            this.$v.donorForm.$touch();
+
+            if( !this.$v.donorForm.$invalid ) {
             addDonor( donorDetails )
                 .then(() => {
                     Vue.$toast.open( {
@@ -340,7 +349,7 @@ export default {
                 })
                 .catch( () => {
                     Vue.$toast.open( {
-                        message: "Email id is not register OR Already Donor",
+                        message: "User not register OR Already Donor",
                         duration: 3000,
                         type: 'error'
                     })
@@ -352,7 +361,31 @@ export default {
             this.donorForm.email = '';  
             this.donorForm.contactNumber = '';  
             this.donorForm.city = '';  
-            this.donorForm.state = '';  
+            this.donorForm.state = ''; 
+            }     
+        },
+
+        encodeBloodGrouop( bloodGroup ) {
+            if( this.allBloodGroups.includes( bloodGroup ) ) {
+                if( bloodGroup === 'O+' ) {
+                    bloodGroup = 'O%2b'
+                } else if ( bloodGroup === 'O-' ) {
+                    bloodGroup = 'O-'
+                } else if ( bloodGroup === 'A+' ) {
+                    bloodGroup = 'A%2b'
+                } else if ( bloodGroup === 'A-' ) {
+                    bloodGroup = 'A-'
+                } else if ( bloodGroup === 'B+' ) {
+                    bloodGroup = 'B%2b'
+                } else if ( bloodGroup === 'B-' ) {
+                    bloodGroup = 'B-'
+                } else if ( bloodGroup === 'AB+' ) {
+                    bloodGroup = 'AB%2b'
+                } else if ( bloodGroup === 'AB-' ) {
+                    bloodGroup = 'AB-'
+                }   
+            }
+            return bloodGroup;
         },
 
         shouldAppendErrorClass( field ) {
@@ -508,6 +541,7 @@ Donation Form CSS
     position: relative;
     top:0;
     background: rgb(53, 53, 53);
+    padding:0 1.5em;
 }
 
 .about-patient{
@@ -539,6 +573,10 @@ Donation Form CSS
     width: 17%;
     margin: auto;
     margin-bottom: 0.7em;
+}
+
+small {
+    color: rgb(238, 228, 228);
 }
 
 </style>

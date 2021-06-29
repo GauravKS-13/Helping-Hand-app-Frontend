@@ -18,7 +18,7 @@
                         'is-valid' : shouldAppendValidClass($v.form.email)
                         }"
                 />
-                <div class="form-text text-muted" v-if="$v.form.email.$error">
+                <div class="form-text text-muted mx-1" v-if="$v.form.email.$error">
                     <div v-if ="!$v.form.email.required">
                         <small>The email field is required </small>
                     </div>
@@ -41,7 +41,7 @@
                         'is-valid' : shouldAppendValidClass ($v.form.password)
                         }"
                 />
-            <div class="form-text text-muted" v-if="$v.form.password.$error">
+            <div class="form-text text-muted mx-1" v-if="$v.form.password.$error">
                 <div v-if="!$v.form.password.required">
                     <small>The password field is required</small>
                 </div>
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-            <p>Do not have an account already? <router-link :to="{name : 'registration-page'}">Register here</router-link></p>
+            <p class="text-class">Do not have an account already? <router-link :to="{name : 'registration-page'}">Register here</router-link></p>
             <button type="submit" class="btn btn-dark btn-sm btn-block">Submit</button>
     </form>
     </div>
@@ -79,7 +79,7 @@ export default {
     name: "AppLogin",
     data() {
         return {
-            form:{
+            form: {
                 email:'',
                 password: ''
 
@@ -146,12 +146,11 @@ export default {
 <style scoped>
 
 body {
-  font-family: 'Baloo Bhai 2', cursive;
-  
+  font-family: 'Baloo Bhai 2', cursive;  
 }
 
 a {
-    color:rgb(48, 81, 230)
+    color:rgb(77, 99, 196)
 }
 a:hover{
     text-decoration: none;
@@ -159,29 +158,38 @@ a:hover{
 }
 
 .form-container{
-  background-image: url('../assets/img18.jpg');  
-  height: 100vh; 
-  background-repeat: no-repeat;
-  background-size: cover; 
-  padding: 9em 0em;
+    background-image: url('../assets/img18.jpg');  
+    height: 100vh; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    padding: 8em 0em;
 } 
 
 hr{
    color: rgb(10, 10, 10);
 }
 
-
-.form-class{
-    /* width: 50%;   */
+.form-class {
     margin: auto;
-     margin-left: 60em; 
-    /* margin-top: 6em; */
+    margin-left: 60em; 
+    font-family: ui-monospace;
 }
 
-button:hover{
+button {
+    font-family: Georgia, serif;
+    margin:0 0.1em;
+}
+
+button:hover {
     background-color: rgb(54, 43, 43);
     cursor: -moz-grab;
-    color: rgb(255, 255, 255);
+    color: rgb(204, 22, 22);
+}
+
+.text-class {
+    font-weight: 500;
+     margin:1em 0.3em;
+
 }
 
 </style>

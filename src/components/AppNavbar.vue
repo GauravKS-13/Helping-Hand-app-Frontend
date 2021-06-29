@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light px-5 py-2" v-if="isAuthenticated">
+  <nav class="navbar navbar-expand-md navbar-light px-5 py-3" v-if="isAuthenticated">
     <div class="mobile">
       <h2 class="nav-meeting-heading">Helping Hand</h2>
       <button

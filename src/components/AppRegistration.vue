@@ -197,7 +197,6 @@ body {
 .container-class{
     background: url('../assets/img20.jpg');
     background-size:cover;
-
 }
 
 .registration-container {
@@ -206,25 +205,12 @@ body {
     margin: auto 60%;
     padding: 10% 0;
 }
-/* 
-.registration-form{
-     margin-top:10em 
-} */
-
-/* .form-heading {
-    /width: 100%; 
-    font-family: ui-monospace;
-    font-weight: 900;
-    color: rgba(0, 0, 0, .75);
- } */
-
-
 
 .user-details {
     border-radius: 0.2em;
     width: 100%;
-    padding: 0.2em 0em;  
-    border: 1px solid black;
+    padding: 0.2em 0.5em;  
+    border: none;
 }
 
 .user-name{
@@ -233,6 +219,12 @@ body {
 .user-email{
     margin: 10px 0;
 }
+
+.email-help{
+    margin:0.2em;
+    font-weight: 500;
+}
+
 .user-password{
     margin-bottom: 2px;
 }
@@ -264,11 +256,11 @@ body {
 
 .router-link{
     text-decoration: none;
-    color: rgb(253, 46, 46);
+    color:rgb(77, 99, 196)
 }
 
 .router-link:hover{
-    color: rgb(30, 158, 105);
+    color: rgb(233, 98, 98);
 }
 
 small{
