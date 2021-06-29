@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light px-5 py-3" v-if="isAuthenticated">
+  <nav
+    class="navbar navbar-expand-md navbar-light px-5 py-3"
+    v-if="isAuthenticated"
+  >
     <div class="mobile">
       <h2 class="nav-meeting-heading">Helping Hand</h2>
       <button
@@ -26,17 +29,21 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" :to="links[2]"
-              >Make Request</router-link>
+              >Make Request</router-link
+            >
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
             <span class="nav-link">
-              <span class="hello-text">Hello</span> <span class="user-name"> {{ email }}</span>
+              <span class="hello-text">Hello</span>
+              <span class="user-name"> {{ email }}</span>
             </span>
           </li>
           <li class="nav-item">
-              <span class="nav-link" style="cursor: pointer" @click="logout()"><span class="logout-text">Log Out</span></span>
+            <span class="nav-link" style="cursor: pointer" @click="logout()"
+              ><span class="logout-text">Log Out</span></span
+            >
           </li>
         </ul>
       </div>
@@ -83,7 +90,9 @@ body {
   font-family: "Baloo Bhai 2", cursive;
 }
 
-.hello-text, .logout-text, a {
+.hello-text,
+.logout-text,
+a {
   font-weight: 500;
 }
 
