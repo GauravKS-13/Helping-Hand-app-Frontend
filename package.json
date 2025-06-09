@@ -26,6 +26,9 @@
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
   },
+ "overrides": {
+    "popper.js": "@popperjs/core@2.11.8"
+  },
   "eslintConfig": {
     "root": true,
     "env": {
